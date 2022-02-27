@@ -8,7 +8,7 @@ import {Menu} from "@mui/icons-material";
 
 export type filterValueType = 'all' | 'active' | 'completed'
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: filterValueType
@@ -58,13 +58,6 @@ function App() {
         setTasksObj({...tasksObj})
     }
 
-    const changeFilter = (value: filterValueType, todolistID: string) => {
-        let todolist = todolists.find(tl => tl.id === todolistID)
-        if (todolist) {
-            todolist.filter = value
-            setTodolists([...todolists])
-        }
-    }
 
     const changeStatus = (taskID: string, isDone: boolean, todolistID: string) => {
         let tasks = tasksObj[todolistID]
@@ -84,6 +77,14 @@ function App() {
             setTasksObj({...tasksObj})
         }
 
+    }
+
+    const changeFilter = (value: filterValueType, todolistID: string) => {
+        let todolist = todolists.find(tl => tl.id === todolistID)
+        if (todolist) {
+            todolist.filter = value
+            setTodolists([...todolists])
+        }
     }
 
     const removeTodolist = (todolistID: string) => {
