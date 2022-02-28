@@ -1,12 +1,29 @@
-import {TodoListType} from "../App";
+import {filterValueType, TodoListType} from "../App";
 import {v1} from "uuid";
 
-type ActionType = {
-    type: string
-    [key: string]: any
+
+export type RemoveTodolistActionType = {
+    type: 'REMOVE-TODOLIST'
+    id: string
+}
+export type AddTodolistActionType = {
+    type: 'ADD-TODOLIST'
+    title: string
+}
+export type ChangeTodolistTitleType = {
+    type: 'CHANGE-TODOLIST-TITLE'
+    id: string
+    title: string
+}
+export type ChangeTodolistFilterType = {
+    type: 'CHANGE-TODOLIST-FILTER'
+    id: string
+    filter: filterValueType
 }
 
-export const todolistReducer = (state: Array<TodoListType>, action: ActionType) => {
+type ActionsType = RemoveTodolistActionType | AddTodolistActionType | ChangeTodolistTitleType | ChangeTodolistFilterType
+
+export const todolistReducer = (state: Array<TodoListType>, action: ActionsType): Array<TodoListType> => {
 
     switch (action.type) {
         case 'REMOVE-TODOLIST': {
@@ -32,4 +49,20 @@ export const todolistReducer = (state: Array<TodoListType>, action: ActionType) 
         default:
             throw new Error('I don\'t understand this action type')
     }
+}
+
+export const RemoveTodolistAC = (todolistID: string): RemoveTodolistActionType => {
+    return {type: "REMOVE-TODOLIST", id: todolistID}
+}
+
+export const AddTodolistAC = (newTodolistTitle: string): AddTodolistActionType => {
+    return {type: "ADD-TODOLIST", title: newTodolistTitle}
+}
+
+export const ChangeTodolistTitleAC = (id: string, title: string): ChangeTodolistTitleType => {
+    return {type: "CHANGE-TODOLIST-TITLE", id, title}
+}
+
+export const ChangeTodolistFilterAC = (id: string, filter: filterValueType): ChangeTodolistFilterType => {
+    return {type: "CHANGE-TODOLIST-FILTER", filter, id}
 }
