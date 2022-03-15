@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import {TaskType, TodoList} from "./TodoList";
 import {AddItemForm} from "./AddItemForm";
@@ -25,31 +25,30 @@ export type TaskStateType = {
     [key: string]: Array<TaskType>
 }
 
-function App() {
+const App = React.memo(() => {
 
 
     const dispatch = useDispatch()
 
     const todolists = useSelector<RootState, Array<TodoListType>>(state => state.todolists)
 
-    const changeFilter = (value: filterValueType, todolistID: string) => {
+    const changeFilter = useCallback((value: filterValueType, todolistID: string) => {
         dispatch(changeTodolistFilterAC(todolistID, value))
-    }
+    }, [dispatch])
 
-    const removeTodolist = (todolistID: string) => {
+    const removeTodolist = useCallback((todolistID: string) => {
         const action = removeTodolistAC(todolistID)
         dispatch(action)
-    }
+    }, [dispatch])
 
-    const changeTodoListStatus = (id: string, newTitle: string) => {
+    const changeTodoListStatus = useCallback((id: string, newTitle: string) => {
         dispatch(changeTodolistTitleAC(id, newTitle))
-    }
+    }, [dispatch])
 
-    const addTodolist = (title: string) => {
+    const addTodolist = useCallback((title: string) => {
         const action = addTodolistAC(title)
         dispatch(action)
-
-    }
+    }, [dispatch])
 
     return (
         <div className={'App'}>
@@ -92,7 +91,7 @@ function App() {
             </Container>
         </div>
     );
-}
+})
 
 export default App
 
