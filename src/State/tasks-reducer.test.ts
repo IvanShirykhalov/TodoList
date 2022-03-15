@@ -1,8 +1,8 @@
 import React from "react";
-import {TaskStateType} from "../App";
+
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, tasksReducer} from "./tasks-reducer";
-import {AddTodolistAC, RemoveTodolistAC} from "./todolist-reducer";
-import {v1} from "uuid";
+import {addTodolistAC, removeTodolistAC} from "./todolist-reducer";
+import {TaskStateType} from "../App";
 
 
 test('correct task should be deleted from correct array', () => {
@@ -27,7 +27,7 @@ test('correct task should be deleted from correct array', () => {
 
     expect(endState['todolistID1'].length).toBe(4)
     expect(endState['todolistID2'].length).toBe(3)
-    expect(endState['todolistID2'].every(t => t.id != '2')).toBeTruthy()
+    expect(endState['todolistID2'].every(t => t.id !== '2')).toBeTruthy()
 })
 
 test('correct task should be added to correct array', () => {
@@ -123,7 +123,7 @@ test('new array should be added when new todolist is added', () => {
         ]
     }
 
-    const action = AddTodolistAC('new todolist')
+    const action = addTodolistAC('new todolist')
 
     const endState = tasksReducer(startState, action)
 
@@ -153,7 +153,7 @@ test('property with todolist should be delete', () => {
         ]
     }
 
-    const action = RemoveTodolistAC('todolistID2')
+    const action = removeTodolistAC('todolistID2')
     const endState = tasksReducer(startState, action)
     const keys = Object.keys(endState)
 
