@@ -29,7 +29,6 @@ const App = React.memo(() => {
 
 
     const dispatch = useDispatch()
-
     const todolists = useSelector<RootState, Array<TodoListType>>(state => state.todolists)
 
     const changeFilter = useCallback((value: filterValueType, todolistID: string) => {

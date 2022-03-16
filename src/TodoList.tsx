@@ -27,6 +27,7 @@ type TodoListPropsType = {
 
 export const TodoList = React.memo((props: TodoListPropsType) => {
 
+
     const dispatch = useDispatch()
     const tasks = useSelector<RootState, Array<TaskType>>(state => state.tasks[props.id])
 
@@ -67,13 +68,10 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
             </h3>
             <AddItemForm addItem={addTask}/>
             <div>
-                {tasksFoToDoList.map((t) =>
-                    <Task changeFilter={props.changeFilter}
-                          removeTodolist={props.removeTodolist}
-                          changeTodoListStatus={props.changeTodoListStatus} task={t}
-                          todolistId={props.id}
-                          key={t.id}
-                    />)}
+                {tasksFoToDoList.map((t) => <Task task={t}
+                                                  todolistId={props.id}
+                                                  key={t.id}
+                />)}
             </div>
             <div>
                 <Button color={'primary'} variant={props.filter === 'all' ? 'contained' : 'text'}
