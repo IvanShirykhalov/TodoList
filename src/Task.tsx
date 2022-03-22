@@ -11,7 +11,6 @@ type TaskPropsType = {
     todolistId: string
 }
 export const Task = React.memo((props: TaskPropsType) => {
-
     const dispatch = useDispatch()
 
     const onRemoveHandler = useCallback(() =>
