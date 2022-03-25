@@ -19,7 +19,7 @@ const initialGlobalState = {
     ],
     tasks: {
         ["todolistId1"]: [
-            {id: v1(), title: "HTML", isDone: true},
+            {id: '1.1', title: "HTML", isDone: true},
             {id: v1(), title: "CSS", isDone: false},
             {id: v1(), title: "JS", isDone: false},
         ],

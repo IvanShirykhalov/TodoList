@@ -42,7 +42,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                        helperText={error}
             />
             <IconButton onClick={onClickHandler} color={'primary'}>
-                <ControlPoint/>
+                <ControlPoint/>!
             </IconButton>
         </div>
     )

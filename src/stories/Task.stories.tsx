@@ -2,7 +2,6 @@ import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
 import {ReduxStoreProviderDecorator} from "../State/ReduxStoreProviderDecorator";
 import {Task} from "../Task";
-import {v1} from "uuid";
 
 
 export default {
@@ -12,12 +11,12 @@ export default {
 } as ComponentMeta<typeof Task>;
 
 
-const Template: ComponentStory<typeof Task> = (args) => <Task {...args}/>;
+const Template: ComponentStory<typeof Task> = (args) => <Task
+    task={{id: '1.1', title: "HTML", isDone: true}}
+    todolistId={"todolistId1"}
+/>;
 
 export const TaskStory = Template.bind({});
 
-TaskStory.args = {
-    todolistId: "todolistId1",
-    task: {id: v1(), title: "HTML", isDone: true},
-};
+TaskStory.args = {};
 
