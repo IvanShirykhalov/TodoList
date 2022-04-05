@@ -14,15 +14,21 @@ export const todolistApi = {
         return instance.get<any, AxiosResponse<TodoType[]>>('todo-lists')
     },
     createTodo(title: string) {
-        return instance.post <any, AxiosResponse<CommonTodoType<{ item: TodoType }>>, { title: string }>('todo-lists', {title})
+        return instance.post <any, AxiosResponse<ResponseType<{ item: TodoType }>>, { title: string }>('todo-lists', {title})
     },
     deleteTodo(todolistId: string) {
-        return instance.delete<any, AxiosResponse<CommonTodoType>>(`todo-lists/${todolistId}`)
+        return instance.delete<any, AxiosResponse<ResponseType>>(`todo-lists/${todolistId}`)
 
     },
     updateTodo(todolistId: string, title: string) {
-        return instance.put<any, AxiosResponse<CommonTodoType>>(`todo-lists/${todolistId}`, {title})
+        return instance.put<any, AxiosResponse<ResponseType>>(`todo-lists/${todolistId}`, {title})
     },
+    getTasks(todolistId: string) {
+        return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
+    },
+    deleteTask (todolistId: string, taskId: string) {
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}` )
+    }
 }
 
 type TodoType = {
@@ -32,27 +38,29 @@ type TodoType = {
     "order": number
 }
 
-type CommonTodoType<T = {}> = {
+type ResponseType<D = {}> = {
     resultCode: number
     messages: string[]
-    data: T
+    data: D
     fieldsErrors: string[]
 }
 
-/*
-type CreateTodoResponseType = {
-    resultCode: number,
-    messages: string[],
-    data: {
-        item: TodoType
-    },
-    fieldsErrors: string[]
+type GetTasksResponse = {
+    error: string | null
+    totalCount: number
+    items: TaskType[]
 }
 
-type DeleteAndUpdateTodoResponseType = {
-    resultCode: number,
-    messages: string[],
-    data: {},
-    fieldsErrors: string[]
+type TaskType = {
+    description: string
+    title: string
+    completed: boolean
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
+    id: string
+    todoListId: string
+    order: number
+    addedDate: string
 }
-*/
