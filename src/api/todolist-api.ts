@@ -26,9 +26,16 @@ export const todolistApi = {
     getTasks(todolistId: string) {
         return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
     },
-    deleteTask (todolistId: string, taskId: string) {
-        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}` )
-    }
+    createTask(todolistId: string, title: string) {
+        return instance.post<any, AxiosResponse<TaskType>, { title: string }>(`todo-lists/${todolistId}/tasks`, {title})
+
+    },
+    deleteTask(todolistId: string, taskId: string) {
+        return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
+    },
+    upgradeTask(todolistId: string, taskId: string, title: string) {
+        return instance.put<UpdateTaskType>(`todo-lists/${todolistId}/tasks/${taskId}`, {title})
+    },
 }
 
 type TodoType = {
@@ -54,7 +61,6 @@ type GetTasksResponse = {
 type TaskType = {
     description: string
     title: string
-    completed: boolean
     status: number
     priority: number
     startDate: string
@@ -63,4 +69,13 @@ type TaskType = {
     todoListId: string
     order: number
     addedDate: string
+}
+
+type UpdateTaskType = {
+    title: string
+    description: string
+    status: number
+    priority: number
+    startDate: string
+    deadline: string
 }
