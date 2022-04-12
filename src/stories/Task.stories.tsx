@@ -1,7 +1,8 @@
 import React from 'react';
-import {ComponentStory, ComponentMeta} from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {ReduxStoreProviderDecorator} from "../State/ReduxStoreProviderDecorator";
 import {Task} from "../Task";
+import {TaskPriorities, TaskStatuses} from "../api/todolist-api";
 
 
 export default {
@@ -12,7 +13,18 @@ export default {
 
 
 const Template: ComponentStory<typeof Task> = (args) => <Task
-    task={{id: '1.1', title: "HTML", isDone: true}}
+    task={{
+        id: '1.1',
+        title: "HTML",
+        status: TaskStatuses.Completed,
+        addedDate: '',
+        description: '',
+        deadline: '',
+        startDate: '',
+        order: 0,
+        priority: TaskPriorities.Low,
+        todoListId: '1'
+    }}
     todolistId={"todolistId1"}
 />;
 

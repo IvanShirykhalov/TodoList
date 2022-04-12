@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import './App.css';
-import {TaskType, TodoList} from "./TodoList";
+import {TodoList} from "./TodoList";
 import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
@@ -8,18 +8,12 @@ import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
-    removeTodolistAC
+    removeTodolistAC, TodoListDomainType, filterValueType
 } from "./State/todolist-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./State/store";
+import {TaskType} from "./api/todolist-api";
 
-export type filterValueType = 'all' | 'active' | 'completed'
-
-export type TodoListType = {
-    id: string
-    title: string
-    filter: filterValueType
-}
 
 export type TaskStateType = {
     [key: string]: Array<TaskType>
@@ -29,7 +23,7 @@ const App = React.memo(() => {
 
 
     const dispatch = useDispatch()
-    const todolists = useSelector<RootState, Array<TodoListType>>(state => state.todolists)
+    const todolists = useSelector<RootState, Array<TodoListDomainType>>(state => state.todolists)
 
     const changeFilter = useCallback((value: filterValueType, todolistID: string) => {
         dispatch(changeTodolistFilterAC(todolistID, value))
