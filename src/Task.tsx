@@ -17,8 +17,8 @@ export const Task = React.memo((props: TaskPropsType) => {
         dispatch(removeTaskAC(props.task.id, props.todolistId)), [dispatch, props.task.id, props.todolistId])
 
     const onChangeStatusHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        let newIdDoneValue = e.currentTarget.checked
-        dispatch(changeTaskStatusAC(newIdDoneValue, props.task.id, props.todolistId))
+        let newIsDoneValue = e.currentTarget.checked
+        dispatch(changeTaskStatusAC(newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New, props.task.id, props.todolistId))
     }, [dispatch, props.task.id, props.todolistId])
 
     const onChangeTitleHandler = useCallback((newValue: string) => {
@@ -29,7 +29,7 @@ export const Task = React.memo((props: TaskPropsType) => {
             <IconButton onClick={onRemoveHandler}>
                 <Delete/>
             </IconButton>
-            <Checkbox checked={props.task.status} onChange={onChangeStatusHandler}/>
+            <Checkbox checked={props.task.status === TaskStatuses.Completed} onChange={onChangeStatusHandler}/>
             <EditableSpan title={props.task.title} onChange={onChangeTitleHandler}/>
         </div>
     )

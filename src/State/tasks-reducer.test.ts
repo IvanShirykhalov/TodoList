@@ -303,7 +303,7 @@ test('status of specified task should be changed', () => {
             {
                 id: '2',
                 title: 'Chocolate',
-                status: TaskStatuses.Completed,
+                status: TaskStatuses.New,
                 todoListId: 'todolistID2',
                 startDate: '',
                 addedDate: '',
@@ -339,7 +339,7 @@ test('status of specified task should be changed', () => {
         ]
     }
 
-    const action = changeTaskStatusAC(false, '2', 'todolistID2')
+    const action = changeTaskStatusAC(TaskStatuses.New, '2', 'todolistID2')
 
     const endState = tasksReducer(startState, action)
 
