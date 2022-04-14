@@ -1,4 +1,3 @@
-import React from "react";
 import {userReducer} from "./user-reducer";
 
 test('use reducer should be correct only age', () => {
@@ -33,3 +32,4 @@ test('user reducer change name of reducer', () => {
     expect(startState.name).toBe('Igor')
     expect(endState.name).toBe('Oleg')
 })
+

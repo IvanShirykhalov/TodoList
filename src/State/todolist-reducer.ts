@@ -69,4 +69,4 @@ export const changeTodolistFilterAC = (id: string, filter: filterValueType) => (
     id
 } as const)
 
-export const setTodolistsAC = (todolists: TodoListDomainType[]) => ({type: 'SET-TODOLISTS', todolists} as const)
+export const setTodolistsAC = (todolists: TodoListType[]) => ({type: 'SET-TODOLISTS', todolists} as const)
