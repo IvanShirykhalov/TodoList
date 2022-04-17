@@ -31,5 +31,5 @@ test('empty arrays should be added when we set todolists', () => {
     const keys = Object.keys(endState)
 
     expect(endState['1']).toBeDefined()
-    expect(endState['2 ']).toBeDefined()
+    expect(endState['2']).toBeDefined()
 })

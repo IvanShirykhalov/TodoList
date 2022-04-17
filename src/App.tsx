@@ -8,11 +8,11 @@ import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
-    removeTodolistAC, TodoListDomainType, filterValueType, setTodolistsAC, fetchTodolists
+    removeTodolistAC, TodoListDomainType, filterValueType, fetchTodolistsTC
 } from "./State/todolist-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./State/store";
-import {TaskType, todolistApi} from "./api/todolist-api";
+import {TaskType} from "./api/todolist-api";
 
 
 export type TaskStateType = {
@@ -26,7 +26,7 @@ const App = React.memo(() => {
     const todolists = useSelector<RootState, Array<TodoListDomainType>>(state => state.todolists)
 
     useEffect(() => {
-        dispatch(fetchTodolists)
+        dispatch(fetchTodolistsTC())
     }, [])
 
 
