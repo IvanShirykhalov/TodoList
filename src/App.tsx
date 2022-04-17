@@ -8,7 +8,7 @@ import {
     addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
-    removeTodolistAC, TodoListDomainType, filterValueType, fetchTodolistsTC
+    removeTodolistAC, TodoListDomainType, filterValueType, fetchTodolistsTC, removeTodolistTC
 } from "./State/todolist-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./State/store";
@@ -35,8 +35,7 @@ const App = React.memo(() => {
     }, [dispatch])
 
     const removeTodolist = useCallback((todolistID: string) => {
-        const action = removeTodolistAC(todolistID)
-        dispatch(action)
+        dispatch(removeTodolistTC(todolistID))
     }, [dispatch])
 
     const changeTodoListStatus = useCallback((id: string, newTitle: string) => {

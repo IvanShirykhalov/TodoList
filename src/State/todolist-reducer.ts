@@ -87,3 +87,12 @@ export const removeTaskTC = (todolistId: string, taskId: string) => {
 
     }
 }
+
+export const removeTodolistTC = (todolistId: string) => {
+    return (dispatch: Dispatch) => {
+        todolistApi.deleteTodo(todolistId)
+            .then(() => {
+                dispatch(removeTodolistAC(todolistId))
+            })
+    }
+}
