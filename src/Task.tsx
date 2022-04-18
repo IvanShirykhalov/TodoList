@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import {changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./State/tasks-reducer";
+import {changeTaskStatusAC, changeTaskTitleAC, changeTaskTitleTC, removeTaskAC} from "./State/tasks-reducer";
 import React, {ChangeEvent, useCallback} from "react";
 import {Checkbox, IconButton} from "@mui/material";
 import {Delete} from "@mui/icons-material";
@@ -24,7 +24,7 @@ export const Task = React.memo((props: TaskPropsType) => {
     }, [dispatch, props.task.id, props.todolistId])
 
     const onChangeTitleHandler = useCallback((newValue: string) => {
-        dispatch(changeTaskTitleAC(newValue, props.task.id, props.todolistId))
+        dispatch(changeTaskTitleTC(newValue, props.task.id, props.todolistId))
     }, [dispatch, props.task.id, props.todolistId])
     return (
         <div key={props.task.id} className={props.task.status === TaskStatuses.Completed ? 'is-done' : ''}>

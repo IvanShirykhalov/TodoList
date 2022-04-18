@@ -5,10 +5,9 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
-    addTodolistAC,
     changeTodolistFilterAC,
     changeTodolistTitleAC,
-    removeTodolistAC, TodoListDomainType, filterValueType, fetchTodolistsTC, removeTodolistTC
+    TodoListDomainType, filterValueType, fetchTodolistsTC, removeTodolistTC, addTodolistTC, changeTodolistTitleTC
 } from "./State/todolist-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./State/store";
@@ -39,12 +38,11 @@ const App = React.memo(() => {
     }, [dispatch])
 
     const changeTodoListStatus = useCallback((id: string, newTitle: string) => {
-        dispatch(changeTodolistTitleAC(id, newTitle))
+        dispatch(changeTodolistTitleTC(id, newTitle))
     }, [dispatch])
 
     const addTodolist = useCallback((title: string) => {
-        const action = addTodolistAC(title)
-        dispatch(action)
+        dispatch(addTodolistTC(title))
     }, [dispatch])
 
     return (

@@ -1,7 +1,7 @@
-import {v1} from "uuid";
 import {todolistApi, TodoListType} from "../api/todolist-api";
 import {Dispatch} from "redux";
 import {removeTaskAC} from "./tasks-reducer";
+import {action} from "@storybook/addon-actions";
 
 
 type ActionsType =
@@ -28,7 +28,7 @@ export const todolistReducer = (state: Array<TodoListDomainType> = initialState,
             return state.filter(tl => tl.id !== action.id)
         }
         case 'ADD-TODOLIST': {
-            return [{id: action.todolistID, title: action.title, filter: 'all', addedDate: '', order: 0}, ...state]
+            return [{...action.todolist, filter: 'all'}, ...state]
         }
         case 'CHANGE-TODOLIST-TITLE': {
             const todolist = state.find(tl => tl.id === action.id)
@@ -55,8 +55,8 @@ export const todolistReducer = (state: Array<TodoListDomainType> = initialState,
 
 export const removeTodolistAC = (id: string) => ({type: "REMOVE-TODOLIST", id} as const)
 
-export const addTodolistAC = (newTodolistTitle: string) => ({
-    type: "ADD-TODOLIST", title: newTodolistTitle, todolistID: v1()
+export const addTodolistAC = (todolist: TodoListType) => ({
+    type: "ADD-TODOLIST", todolist
 } as const)
 
 export const changeTodolistTitleAC = (id: string, title: string) => ({
@@ -96,3 +96,22 @@ export const removeTodolistTC = (todolistId: string) => {
             })
     }
 }
+
+export const addTodolistTC = (title: string) => {
+    return (dispatch: Dispatch) => {
+        todolistApi.createTodo(title)
+            .then((res) => {
+                dispatch(addTodolistAC(res.data.data.item))
+            })
+    }
+}
+
+export const changeTodolistTitleTC = (todolistId: string, title: string) => {
+    return (dispatch: Dispatch) => {
+        todolistApi.updateTodo(todolistId, title)
+            .then(res => {
+                dispatch(changeTodolistTitleAC(todolistId, title))
+            })
+    }
+}
+

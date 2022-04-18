@@ -47,7 +47,7 @@ export const tasksReducer = (state: TaskStateType = initialState, action: Action
         case 'ADD-TODOLIST': {
             return {
                 ...state,
-                [action.todolistID]: []
+                [action.todolist.id]: []
             }
 
         }
@@ -103,6 +103,15 @@ export const addTaskTC = (todolistId: string, title: string) => {
         todolistApi.createTask(todolistId, title)
             .then(res => {
                 dispatch(addTaskAC(res.data.data.item))
+            })
+    }
+}
+
+export const changeTaskTitleTC = (taskTitle: string, taskID: string, todolistID: string) => {
+    return (dispatch: Dispatch) => {
+        todolistApi.upgradeTask(todolistID, taskID, taskTitle)
+            .then(res => {
+                dispatch(changeTaskTitleAC(taskTitle, taskID, todolistID))
             })
     }
 }
