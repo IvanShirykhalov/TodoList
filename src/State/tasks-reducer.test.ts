@@ -1,9 +1,6 @@
-import React from "react";
-
 import {
     addTaskAC,
-    changeTaskStatusAC,
-    changeTaskTitleAC,
+    updateTaskAC,
     removeTaskAC,
     setTasksAC,
     tasksReducer
@@ -159,7 +156,7 @@ test('correct task should be added to correct array', () => {
 
 test('status of specified task should be changed', () => {
 
-    const action = changeTaskStatusAC(TaskStatuses.New, '2', 'todolistID2')
+    const action = updateTaskAC(TaskStatuses.New, '2', 'todolistID2')
 
     const endState = tasksReducer(startState, action)
 
