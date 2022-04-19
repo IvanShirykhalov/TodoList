@@ -5,9 +5,13 @@ import {AddItemForm} from "./AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {
+    addTodolistTC,
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
-    TodoListDomainType, filterValueType, fetchTodolistsTC, removeTodolistTC, addTodolistTC, changeTodolistTitleTC
+    changeTodolistTitleTC,
+    fetchTodolistsTC,
+    filterValueType,
+    removeTodolistTC,
+    TodoListDomainType
 } from "./State/todolist-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./State/store";
