@@ -1,14 +1,14 @@
 import React, {useCallback, useEffect} from 'react';
-import {AddItemForm} from "./AddItemForm";
-import {EditableSpan} from "./EditableSpan";
+import {AddItemForm} from "../../components/AddItemForm/AddItemForm";
+import {EditableSpan} from "../../components/EditableSpan/EditableSpan";
 import {Button, IconButton} from '@mui/material';
 import {Delete} from '@mui/icons-material';
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./State/store";
-import {addTaskTC, fetchTasksTC} from "./State/tasks-reducer";
-import {Task} from "./Task";
-import {TaskStatuses, TaskType} from "./api/todolist-api";
-import {filterValueType} from "./State/todolist-reducer";
+import {RootState} from "../../app/store";
+import {addTaskTC, fetchTasksTC} from "../Tasks/tasks-reducer";
+import {Task} from "../Tasks/Task";
+import {TaskStatuses, TaskType} from "../../api/todolist-api";
+import {filterValueType} from "./todolist-reducer";
 
 
 type TodoListPropsType = {
@@ -29,7 +29,7 @@ export const TodoList = React.memo((props: TodoListPropsType) => {
 
     useEffect(() => {
         dispatch(fetchTasksTC(props.id))
-    }, [])
+    }, [dispatch, props.id])
 
     const onFilterClickHandler = useCallback((filter: filterValueType, todolistID: string) => {
         props.changeFilter(filter, todolistID)

@@ -1,7 +1,7 @@
 import React from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-import {ReduxStoreProviderDecorator} from "../State/ReduxStoreProviderDecorator";
-import {TodoList} from "../TodoList";
+import {ReduxStoreProviderDecorator} from "../../app/ReduxStoreProviderDecorator";
+import {TodoList} from "./TodoList";
 import {action} from "@storybook/addon-actions";
 
 

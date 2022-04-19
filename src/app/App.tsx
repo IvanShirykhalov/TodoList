@@ -1,26 +1,21 @@
 import React, {useCallback, useEffect} from 'react';
 import './App.css';
-import {TodoList} from "./TodoList";
-import {AddItemForm} from "./AddItemForm";
+import {TodoList} from "../features/Todolists/TodoList";
+import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "./store";
+import {TaskType} from "../api/todolist-api";
 import {
     addTodolistTC,
     changeTodolistFilterAC,
-    changeTodolistTitleTC,
-    fetchTodolistsTC,
-    filterValueType,
-    removeTodolistTC,
+    changeTodolistTitleTC, fetchTodolistsTC,
+    filterValueType, removeTodolistTC,
     TodoListDomainType
-} from "./State/todolist-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./State/store";
-import {TaskType} from "./api/todolist-api";
+} from "../features/Todolists/todolist-reducer";
 
 
-export type TaskStateType = {
-    [key: string]: Array<TaskType>
-}
 
 const App = React.memo(() => {
 
