@@ -5,7 +5,7 @@ import {AddItemForm} from "../components/AddItemForm/AddItemForm";
 import {AppBar, Button, Container, Grid, IconButton, LinearProgress, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "./store";
+import {AppRootStateType} from "./store";
 import {
     addTodolistTC,
     changeTodolistFilterAC,
@@ -22,7 +22,7 @@ const App = React.memo(() => {
 
 
     const dispatch = useDispatch()
-    const todolists = useSelector<RootState, Array<TodoListDomainType>>(state => state.todolists)
+    const todolists = useSelector<AppRootStateType, Array<TodoListDomainType>>(state => state.todolists)
 
     useEffect(() => {
         dispatch(fetchTodolistsTC())

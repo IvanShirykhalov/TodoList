@@ -1,7 +1,7 @@
 import {TaskPriorities, TaskStatuses, TaskType, todolistApi, UpdateTaskModelType} from "../../api/todolist-api";
 import {addTodolistActionType, removeTodolistActionType, setTodolistsActionType} from "../Todolists/todolist-reducer";
 import {Dispatch} from "redux";
-import {RootState} from "../../app/store";
+import {AppRootStateType} from "../../app/store";
 
 type ActionsType =
     | ReturnType<typeof removeTaskAC>
@@ -84,7 +84,7 @@ export type UpdateDomainTaskModelType = {
 }
 
 export const updateTaskTC = (domainModel: UpdateDomainTaskModelType, taskID: string, todolistID: string) =>
-    (dispatch: Dispatch<ActionsType>, getState: () => RootState) => {
+    (dispatch: Dispatch<ActionsType>, getState: () => AppRootStateType) => {
         const state = getState()
         const task = state.tasks[todolistID].find(t => t.id === taskID)
         if (!task) {

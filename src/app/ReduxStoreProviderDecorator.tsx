@@ -1,5 +1,5 @@
 import {Provider} from "react-redux";
-import {RootState} from "./store";
+import {AppRootStateType} from "./store";
 import React from "react";
 import {combineReducers, createStore} from "redux";
 import {tasksReducer} from "../features/Tasks/tasks-reducer";
@@ -85,11 +85,12 @@ const initialGlobalState = {
         ]
     },
     app: {
-        status: 'idle'
+        status: 'idle',
+        error: null
     }
 };
 
-export const storyBookStore = createStore(rootReducer, initialGlobalState as RootState);
+export const storyBookStore = createStore(rootReducer, initialGlobalState as AppRootStateType);
 
 export const ReduxStoreProviderDecorator = (storyFn: () => React.ReactNode) => {
     return <Provider store={storyBookStore}>{storyFn()}</Provider>
