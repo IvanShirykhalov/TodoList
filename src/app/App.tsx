@@ -2,19 +2,20 @@ import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {TodoList} from "../features/Todolists/TodoList";
 import {AddItemForm} from "../components/AddItemForm/AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from "@mui/material";
+import {AppBar, Button, Container, Grid, IconButton, LinearProgress, Paper, Toolbar, Typography} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./store";
-import {TaskType} from "../api/todolist-api";
 import {
     addTodolistTC,
     changeTodolistFilterAC,
-    changeTodolistTitleTC, fetchTodolistsTC,
-    filterValueType, removeTodolistTC,
+    changeTodolistTitleTC,
+    fetchTodolistsTC,
+    filterValueType,
+    removeTodolistTC,
     TodoListDomainType
 } from "../features/Todolists/todolist-reducer";
-
+import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 
 
 const App = React.memo(() => {
@@ -47,6 +48,7 @@ const App = React.memo(() => {
     return (
         <div className={'App'}>
             <AppBar position={'static'}>
+                <ErrorSnackbar/>
                 <Toolbar>
                     <IconButton edge={'start'} color={'inherit'} aria-label={'menu'}>
                         <Menu/>
@@ -56,6 +58,7 @@ const App = React.memo(() => {
                     </Typography>
                     <Button color={'inherit'}> Login</Button>
                 </Toolbar>
+                <LinearProgress/>
             </AppBar>
             <Container fixed style={{padding: '20px'}}>
                 <Grid container style={{padding: '20px'}}>
@@ -83,6 +86,7 @@ const App = React.memo(() => {
                     })}
                 </Grid>
             </Container>
+
         </div>
     );
 })

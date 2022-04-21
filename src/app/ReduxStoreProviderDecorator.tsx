@@ -83,6 +83,9 @@ const initialGlobalState = {
                 todoListId: "todolistId2"
             },
         ]
+    },
+    app: {
+        status: 'idle'
     }
 };
 
