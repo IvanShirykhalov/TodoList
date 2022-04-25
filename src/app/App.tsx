@@ -16,17 +16,19 @@ import {
     TodoListDomainType
 } from "../features/Todolists/todolist-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
+import {RequestStatusType} from "./app-reducer";
 
 
 const App = React.memo(() => {
 
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
 
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodoListDomainType>>(state => state.todolists)
 
     useEffect(() => {
         dispatch(fetchTodolistsTC())
-    }, [])
+    }, [dispatch])
 
 
     const changeFilter = useCallback((value: filterValueType, todolistID: string) => {
@@ -58,7 +60,7 @@ const App = React.memo(() => {
                     </Typography>
                     <Button color={'inherit'}> Login</Button>
                 </Toolbar>
-                <LinearProgress/>
+                {status === 'loading' && <LinearProgress/>}
             </AppBar>
             <Container fixed style={{padding: '20px'}}>
                 <Grid container style={{padding: '20px'}}>
