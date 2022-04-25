@@ -4,8 +4,9 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled?: boolean
 }
-export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo(({disabled = false, ...props}: AddItemFormPropsType) => {
 
     const [title, setTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
@@ -33,7 +34,8 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
 
     return (
         <div>
-            <TextField variant={'standard'}
+            <TextField disabled={disabled}
+                       variant={'standard'}
                        label={'Type value'}
                        value={title}
                        onChange={onChangeHandler}
@@ -41,7 +43,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                        error={!!error}
                        helperText={error}
             />
-            <IconButton onClick={onClickHandler} color={'primary'}>
+            <IconButton onClick={onClickHandler} color={'primary'} disabled={disabled}>
                 <ControlPoint/>
             </IconButton>
         </div>

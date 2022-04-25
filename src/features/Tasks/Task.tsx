@@ -9,8 +9,9 @@ import {TaskStatuses, TaskType} from "../../api/todolist-api";
 type TaskPropsType = {
     task: TaskType
     todolistId: string
+    demo?: boolean
 }
-export const Task = React.memo((props: TaskPropsType) => {
+export const Task = React.memo(({demo, ...props}: TaskPropsType) => {
     const dispatch = useDispatch()
 
     const onRemoveHandler = useCallback(() => {

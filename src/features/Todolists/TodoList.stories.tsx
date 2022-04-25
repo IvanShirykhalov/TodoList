@@ -17,9 +17,14 @@ const Template: ComponentStory<typeof TodoList> = (args) => <TodoList {...args}/
 export const TodoListStory = Template.bind({});
 
 TodoListStory.args = {
-    id: "todolistId1",
-    title: "What to learn",
-    filter: "all",
+    todolist: {
+        id: "todolistId1",
+        title: "What to learn",
+        filter: "all",
+        order: 0,
+        addedDate: '',
+        entityStatus: "idle"
+    },
     changeTodoListStatus: action('changeTodoListStatus'),
     removeTodolist: action('removeTodolist'),
     changeFilter: action('changeFilter')

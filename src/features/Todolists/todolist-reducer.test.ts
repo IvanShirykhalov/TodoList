@@ -1,20 +1,26 @@
 import {v1} from "uuid";
 import {
-    addTodolistAC, changeTodolistFilterAC,
+    addTodolistAC, changeTodolistEntityStatusAC, changeTodolistFilterAC,
     changeTodolistTitleAC, filterValueType,
     removeTodolistAC, setTodolistsAC, TodoListDomainType,
     todolistReducer
 } from "./todolist-reducer";
+import {RequestStatusType} from "../../app/app-reducer";
 
-test('todolist should be removed', () => {
+let todolistID1: string
+let todolistID2: string
+let startState: Array<TodoListDomainType>
 
+beforeEach(() => {
     let todolistID1 = v1()
     let todolistID2 = v1()
-
-    const startState: Array<TodoListDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''},
+    startState = [
+        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: '', entityStatus: 'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: '', entityStatus: 'idle'},
     ]
+})
+
+test('todolist should be removed', () => {
 
     const endState = todolistReducer(startState, removeTodolistAC(todolistID1))
 
@@ -24,16 +30,7 @@ test('todolist should be removed', () => {
 })
 
 test('correct todolist should be added', () => {
-    let todolistID1 = v1()
-    let todolistID2 = v1()
-
     let newTodolistTitle = 'New Todolist'
-
-    const startState: Array<TodoListDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''},
-    ]
-
 
     const endState = todolistReducer(startState, addTodolistAC({
         title: newTodolistTitle,
@@ -49,16 +46,7 @@ test('correct todolist should be added', () => {
 })
 
 test('correct todolist should change its name', () => {
-
-    let todolistID1 = v1()
-    let todolistID2 = v1()
-
     let newTodolistTitle = 'New title'
-
-    const startState: Array<TodoListDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''},
-    ]
 
     const endState = todolistReducer(startState, changeTodolistTitleAC(todolistID2, newTodolistTitle))
 
@@ -67,17 +55,7 @@ test('correct todolist should change its name', () => {
 })
 
 test('correct filter of todolist should be changed', () => {
-
-    let todolistID1 = v1()
-    let todolistID2 = v1()
-
     let newFiler: filterValueType = 'completed'
-
-    const startState: Array<TodoListDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''},
-    ]
-
 
     const endState = todolistReducer(startState, changeTodolistFilterAC(todolistID2, newFiler))
 
@@ -85,15 +63,21 @@ test('correct filter of todolist should be changed', () => {
     expect(endState[1].filter).toBe('completed')
 })
 
-test('todolists should be set to the state', () => {
-
+test('correct status of todolist should be changed', () => {
     let todolistID1 = v1()
     let todolistID2 = v1()
-
-    const startState: Array<TodoListDomainType> = [
-        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: ''},
-        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: ''},
+    startState = [
+        {id: todolistID1, title: 'What to learn', filter: 'all', order: 0, addedDate: '', entityStatus: 'idle'},
+        {id: todolistID2, title: 'What to buy', filter: 'all', order: 0, addedDate: '', entityStatus: 'idle'},
     ]
+
+    const endState = todolistReducer(startState, changeTodolistEntityStatusAC(todolistID2, "loading"))
+
+    expect(endState[1].entityStatus).toBe("loading")
+    expect(endState[0].entityStatus).toBe("idle")
+})
+
+test('todolists should be set to the state', () => {
 
     const action = setTodolistsAC(startState)
 

@@ -1,26 +1,29 @@
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import {ComponentStory, ComponentMeta} from '@storybook/react';
 import {AddItemForm} from "./AddItemForm";
 import {action} from "@storybook/addon-actions";
 
 
 export default {
-  title: 'TodoList/AddItemForm',
-  component: AddItemForm,
+    title: 'TodoList/AddItemForm',
+    component: AddItemForm,
 
-  argTypes: {
-    addItem: {
-      description: 'Button clicked inside form'
+    argTypes: {
+        addItem: {
+            description: 'Button clicked inside form'
+        },
     },
-  },
 } as ComponentMeta<typeof AddItemForm>;
 
 
 const Template: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm {...args} />;
 
 export const AddItemFormStory = Template.bind({});
-
 AddItemFormStory.args = {
-  addItem: action('Button clicked inside form')
+    addItem: action('Button clicked inside form')
 };
 
+export const AddItemFormDisabledStory = Template.bind({})
+AddItemFormDisabledStory.args = {
+    disabled: true
+}

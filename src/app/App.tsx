@@ -18,8 +18,11 @@ import {
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {RequestStatusType} from "./app-reducer";
 
+type PropsType = {
+    demo?: boolean
+}
 
-const App = React.memo(() => {
+const App = React.memo(({demo = false}: PropsType) => {
 
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
 
@@ -27,8 +30,11 @@ const App = React.memo(() => {
     const todolists = useSelector<AppRootStateType, Array<TodoListDomainType>>(state => state.todolists)
 
     useEffect(() => {
+        if (demo) {
+            return
+        }
         dispatch(fetchTodolistsTC())
-    }, [dispatch])
+    }, [dispatch, demo])
 
 
     const changeFilter = useCallback((value: filterValueType, todolistID: string) => {
@@ -73,11 +79,10 @@ const App = React.memo(() => {
                             <Grid item>
                                 <Paper style={{padding: '10px'}} elevation={6}>
                                     <TodoList
+                                        demo={demo}
+                                        todolist={tl}
                                         key={tl.id}
-                                        id={tl.id}
-                                        title={tl.title}
                                         changeFilter={changeFilter}
-                                        filter={tl.filter}
                                         removeTodolist={removeTodolist}
                                         changeTodoListStatus={changeTodoListStatus}
                                     />
