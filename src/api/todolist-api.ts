@@ -80,7 +80,7 @@ export const todolistApi = {
 
     },
     updateTodo(todolistId: string, title: string) {
-        return instance.put<any, AxiosResponse<ResponseType>>(`todo-lists/${todolistId}`, {title})
+        return instance.put<{ title: string }, AxiosResponse<ResponseType>>(`todo-lists/${todolistId}`, {title})
     },
 
     //task
@@ -96,7 +96,7 @@ export const todolistApi = {
         return instance.delete<ResponseType>(`todo-lists/${todolistId}/tasks/${taskId}`)
     },
     upgradeTask(todolistId: string, taskId: string, model: UpdateTaskModelType) {
-        return instance.put<UpdateTaskModelType>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
+        return instance.put<UpdateTaskModelType, AxiosResponse<ResponseType<{ item: TaskType }>>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
     },
 }
 

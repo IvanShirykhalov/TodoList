@@ -14,7 +14,6 @@ export const ErrorSnackbar = () => {
     const status = useSelector<AppRootStateType>(state => state.app.status)
     const error = useSelector<AppRootStateType, string | null>(state => state.app.error)
     const dispatch = useDispatch()
-    /*    const [open, setOpen] = useState(true);*/
 
     const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
         if (reason === 'clickaway') {

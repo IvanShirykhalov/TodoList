@@ -12,7 +12,7 @@ export default {
 } as ComponentMeta<typeof Task>;
 
 
-const Template: ComponentStory<typeof Task> = (args) => <Task
+const Template: ComponentStory<typeof Task> = () => <Task
     task={{
         id: '1.1',
         title: "HTML",
