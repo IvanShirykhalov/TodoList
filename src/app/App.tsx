@@ -17,6 +17,8 @@ import {
 } from "../features/Todolists/todolist-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
 import {RequestStatusType} from "./app-reducer";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Login} from "../features/Login/Loging";
 
 type PropsType = {
     demo?: boolean
@@ -54,47 +56,53 @@ const App = React.memo(({demo = false}: PropsType) => {
     }, [dispatch])
 
     return (
-        <div className={'App'}>
-            <AppBar position={'static'}>
-                <ErrorSnackbar/>
-                <Toolbar>
-                    <IconButton edge={'start'} color={'inherit'} aria-label={'menu'}>
-                        <Menu/>
-                    </IconButton>
-                    <Typography variant={'h6'}>
-                        News
-                    </Typography>
-                    <Button color={'inherit'}> Login</Button>
-                </Toolbar>
-                {status === 'loading' && <LinearProgress/>}
-            </AppBar>
-            <Container fixed style={{padding: '20px'}}>
-                <Grid container style={{padding: '20px'}}>
-                    <AddItemForm addItem={addTodolist}/>
-                </Grid>
-                <Grid container spacing={4}>
-                    {todolists.map((tl) => {
+        <BrowserRouter>
+            <div className={'App'}>
+                <AppBar position={'static'}>
+                    <ErrorSnackbar/>
+                    <Toolbar>
+                        <IconButton edge={'start'} color={'inherit'} aria-label={'menu'}>
+                            <Menu/>
+                        </IconButton>
+                        <Typography variant={'h6'}>
+                            News
+                        </Typography>
+                        <Button color={'inherit'}> Login</Button>
+                    </Toolbar>
+                    {status === 'loading' && <LinearProgress/>}
+                </AppBar>
+                <Container fixed style={{padding: '20px'}}>
+                    <Grid container style={{padding: '20px'}}>
+                        <AddItemForm addItem={addTodolist}/>
+                    </Grid>
+                    <Routes>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/" element={<Grid container spacing={4}>
+                            {todolists.map((tl) => {
 
-                        return (
-                            <Grid item>
-                                <Paper style={{padding: '10px'}} elevation={6}>
-                                    <TodoList
-                                        demo={demo}
-                                        todolist={tl}
-                                        key={tl.id}
-                                        changeFilter={changeFilter}
-                                        removeTodolist={removeTodolist}
-                                        changeTodoListStatus={changeTodoListStatus}
-                                    />
-                                </Paper>
-                            </Grid>
-                        )
+                                return (
+                                    <Grid item>
+                                        <Paper style={{padding: '10px'}} elevation={6}>
+                                            <TodoList
+                                                demo={demo}
+                                                todolist={tl}
+                                                key={tl.id}
+                                                changeFilter={changeFilter}
+                                                removeTodolist={removeTodolist}
+                                                changeTodoListStatus={changeTodoListStatus}
+                                            />
+                                        </Paper>
+                                    </Grid>
+                                )
 
-                    })}
-                </Grid>
-            </Container>
+                            })}
+                        </Grid>}/>
+                        <Route path="*" element={<h1>404: PAGE NOT FOUND</h1>}/>
+                    </Routes>
+                </Container>
 
-        </div>
+            </div>
+        </BrowserRouter>
     );
 })
 
