@@ -100,3 +100,15 @@ export const todolistApi = {
     },
 }
 
+export type LoginParamsType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha?: string
+}
+export const auithAPI = {
+    login(data: LoginParamsType) {
+        return instance.post <any, AxiosResponse<ResponseType<{ userId?: number}>>>
+        ('auth/login', data)
+    }
+}
