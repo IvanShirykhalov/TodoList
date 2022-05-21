@@ -1,6 +1,6 @@
 import {Dispatch} from "redux";
 import {setAppStatusAC, setErrorActionType, setStatusActionType} from "../../app/app-reducer";
-import {auithAPI, LoginParamsType} from "../../api/todolist-api";
+import {authAPI, LoginParamsType} from "../../api/todolist-api";
 import {handleServerAppError, handleServerNetworkError} from "../../utils/error-utils";
 
 type ActionsType = any
@@ -18,7 +18,7 @@ export const loginReducer = (state: initialStateType = initialState, action: Act
 
 export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC('loading'))
-    auithAPI.login(data)
+    authAPI.login(data)
         .then(res => {
             if (res.data.resultCode === 0) {
                 alert('!!!')

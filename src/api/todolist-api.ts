@@ -106,7 +106,7 @@ export type LoginParamsType = {
     rememberMe: boolean
     captcha?: string
 }
-export const auithAPI = {
+export const authAPI = {
     login(data: LoginParamsType) {
         return instance.post <any, AxiosResponse<ResponseType<{ userId?: number}>>>
         ('auth/login', data)
