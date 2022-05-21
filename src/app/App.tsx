@@ -72,14 +72,13 @@ const App = React.memo(({demo = false}: PropsType) => {
                     {status === 'loading' && <LinearProgress/>}
                 </AppBar>
                 <Container fixed style={{padding: '20px'}}>
-                    <Grid container style={{padding: '20px'}}>
-                        <AddItemForm addItem={addTodolist}/>
-                    </Grid>
                     <Routes>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/" element={<Grid container spacing={4}>
+                            <Grid container style={{padding: '20px'}}>
+                                <AddItemForm addItem={addTodolist}/>
+                            </Grid>
                             {todolists.map((tl) => {
-
                                 return (
                                     <Grid item>
                                         <Paper style={{padding: '10px'}} elevation={6}>
@@ -94,7 +93,6 @@ const App = React.memo(({demo = false}: PropsType) => {
                                         </Paper>
                                     </Grid>
                                 )
-
                             })}
                         </Grid>}/>
                         <Route path="*" element={<h1>404: PAGE NOT FOUND</h1>}/>
