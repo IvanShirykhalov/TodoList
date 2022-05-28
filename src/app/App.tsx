@@ -2,7 +2,18 @@ import React, {useCallback, useEffect} from 'react';
 import './App.css';
 import {TodoList} from "../features/Todolists/TodoList";
 import {AddItemForm} from "../components/AddItemForm/AddItemForm";
-import {AppBar, Button, Container, Grid, IconButton, LinearProgress, Paper, Toolbar, Typography} from "@mui/material";
+import {
+    AppBar,
+    Button,
+    CircularProgress,
+    Container,
+    Grid,
+    IconButton,
+    LinearProgress,
+    Paper,
+    Toolbar,
+    Typography
+} from "@mui/material";
 import {Menu} from "@mui/icons-material";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./store";
@@ -27,6 +38,8 @@ type PropsType = {
 const App = React.memo(({demo = false}: PropsType) => {
 
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+
+    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
 
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodoListDomainType>>(state => state.todolists)
@@ -54,6 +67,11 @@ const App = React.memo(({demo = false}: PropsType) => {
     const addTodolist = useCallback((title: string) => {
         dispatch(addTodolistTC(title))
     }, [dispatch])
+
+    if (!isInitialized) {
+        return <div style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}
+        ><CircularProgress/></div>
+    }
 
     return (
         <BrowserRouter>
