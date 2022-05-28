@@ -27,7 +27,7 @@ import {
     TodoListDomainType
 } from "../features/Todolists/todolist-reducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import {RequestStatusType} from "./app-reducer";
+import {initializeAppTC, RequestStatusType} from "./app-reducer";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Loging";
 
@@ -38,8 +38,11 @@ type PropsType = {
 const App = React.memo(({demo = false}: PropsType) => {
 
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.app.isInitialized)
+
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [])
 
     const dispatch = useDispatch()
     const todolists = useSelector<AppRootStateType, Array<TodoListDomainType>>(state => state.todolists)

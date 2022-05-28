@@ -9,6 +9,7 @@ import {addTaskTC, fetchTasksTC} from "../Tasks/tasks-reducer";
 import {Task} from "../Tasks/Task";
 import {TaskStatuses, TaskType} from "../../api/todolist-api";
 import {filterValueType, TodoListDomainType} from "./todolist-reducer";
+import {Navigate} from "react-router-dom";
 
 
 type TodoListPropsType = {
@@ -25,13 +26,14 @@ export const TodoList = React.memo(({demo = false, ...props}: TodoListPropsType)
 
     const dispatch = useDispatch()
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[props.todolist.id])
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
     useEffect(() => {
-        if (demo) {
+        if (demo || !isLoggedIn) {
             return
         }
         dispatch(fetchTasksTC(props.todolist.id))
-    }, [dispatch, props.todolist.id, demo])
+    }, [dispatch, props.todolist.id, demo, isLoggedIn])
 
     const onFilterClickHandler = useCallback((filter: filterValueType, todolistID: string) => {
         props.changeFilter(filter, todolistID)
@@ -60,6 +62,9 @@ export const TodoList = React.memo(({demo = false, ...props}: TodoListPropsType)
             break;
     }
 
+    if (!isLoggedIn) {
+        return <Navigate to={'login'}/>
+    }
 
     return (
         <div>
