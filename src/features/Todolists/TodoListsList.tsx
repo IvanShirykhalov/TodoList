@@ -28,7 +28,7 @@ export const TodoListsList = React.memo(({demo = false}: PropsType) => {
             return
         }
         dispatch(fetchTodolistsTC())
-    }, [dispatch, demo])
+    }, [dispatch, demo, isLoggedIn])
 
     const changeFilter = useCallback((value: filterValueType, todolistID: string) => {
         dispatch(changeTodolistFilterAC(todolistID, value))
