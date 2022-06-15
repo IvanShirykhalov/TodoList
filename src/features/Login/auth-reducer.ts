@@ -23,7 +23,7 @@ export const authReducer = (state: initialStateType = initialState, action: Acti
 
 export const setIsLoggedInAC = (value: boolean) => ({type: 'SET-IS-LOGGED-IN', value} as const)
 
-export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType | setErrorActionType | setStatusActionType>) => {
+export const loginTC = (data: LoginParamsType) => (dispatch: ThunkDispatch) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.login(data)
         .then(res => {
@@ -39,7 +39,7 @@ export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsTyp
 
 }
 
-export const logoutTC = () => (dispatch: Dispatch<ActionsType | setErrorActionType | setStatusActionType>) => {
+export const logoutTC = () => (dispatch: ThunkDispatch) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.logout()
         .then(res => {
